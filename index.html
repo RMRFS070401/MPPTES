@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Monitoring Man Power</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="loginPage">
+            <h2>Login - Man Power Planning</h2>
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="login()">Login</button>
+        </div>
+
+        <div id="dashboard" class="hidden">
+            <h2>Dashboard</h2>
+            <button onclick="showStandarMPP()">Standar MPP</button>
+            <button onclick="showAktualMPP()">Aktual MPP</button>
+            <button onclick="showPlanningPPIC()">Planning PPIC</button>
+            <button onclick="showInputSKU()">Input SKU</button>
+        </div>
+
+        <div id="standarMPP" class="hidden">
+            <h2>Standar MPP</h2>
+            <select id="lineSelect">
+                <option value="">Pilih Line</option>
+            </select>
+            <div id="standarMPPForm" class="hidden">
+                <select id="skuSelect"></select>
+                <input type="number" id="standarMPPInput" placeholder="Standar MPP">
+                <button onclick="submitStandarMPP()">Submit</button>
+                <button onclick="backToLineSelection('standarMPP')" class="back-button">Kembali ke Pilihan Line</button>
+            </div>
+            <button onclick="backToDashboard('standarMPP')" class="back-button">Kembali ke Dashboard</button>
+        </div>
+
+        <div id="aktualMPP" class="hidden">
+            <h2>Aktual MPP</h2>
+            <select id="aktualLineSelect">
+                <option value="">Pilih Line</option>
+            </select>
+            <div id="aktualMPPForm" class="hidden">
+                <input type="date" id="tanggalAktual">
+                <select id="shiftSelect">
+                    <option value="1">Shift 1</option>
+                    <option value="2">Shift 2</option>
+                    <option value="3">Shift 3</option>
+                </select>
+                <select id="aktualSKUSelect"></select>
+                <input type="number" id="standarFormasiMP" readonly placeholder="Standar Formasi MP">
+                <input type="number" id="aktualJumlahMP" placeholder="Aktual Jumlah MP" onkeypress="handleAktualMPInput(event)">
+                <input type="number" id="selisihMP" readonly placeholder="Selisih MP">
+                <input type="text" id="keteranganJumlahMP" readonly placeholder="Keterangan Jumlah MP">
+                <div id="kelebihanForms" class="hidden">
+                    <div id="kelebihanContainer"></div>
+                </div>
+                <div id="uploadBeritaAcara" class="hidden">
+                    <input type="file" id="beritaAcaraFile" accept=".pdf">
+                </div>
+                <button id="submitButton" onclick="submitAktualMPP()" class="hidden">Submit</button>
+                <button onclick="backToLineSelection('aktualMPP')" class="back-button">Kembali ke Pilihan Line</button>
+            </div>
+            <button onclick="backToDashboard('aktualMPP')" class="back-button">Kembali ke Dashboard</button>
+        </div>
+
+        <div id="planningPPIC" class="hidden">
+            <h2>Planning PPIC</h2>
+            <select id="ppicLineSelect">
+                <option value="">Pilih Line</option>
+            </select>
+            <div id="ppicForm" class="hidden">
+                <input type="week" id="weekSelector">
+                <table id="planningTable">
+                    <thead>
+                        <tr>
+                            <th>Hari</th>
+                            <th>Tanggal</th>
+                            <th>Shift</th>
+                            <th>SKU</th>
+                            <th>Standar MPP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Will be populated dynamically -->
+                    </tbody>
+                </table>
+                <button onclick="submitPlanningPPIC()">Submit</button>
+                <button onclick="backToLineSelection('planningPPIC')" class="back-button">Kembali ke Pilihan Line</button>
+            </div>
+            <button onclick="backToDashboard('planningPPIC')" class="back-button">Kembali ke Dashboard</button>
+        </div>
+
+        <div id="inputSKU" class="hidden">
+            <h2>Input SKU</h2>
+            <select id="skuLineSelect">
+                <option value="">Pilih Line</option>
+            </select>
+            <div id="skuForm" class="hidden">
+                <input type="text" id="skuInput" placeholder="Nama SKU">
+                <button id="addSKUButton">Tambah SKU</button>
+                <ul id="skuList"></ul>
+                <button id="submitSKUButton">Submit</button>
+                <button id="backToLineButton" class="back-button">Kembali ke Pilihan Line</button>
+            </div>
+            <button id="backToDashboardButton" class="back-button">Kembali ke Dashboard</button>
+        </div>
+
+        <div id="uploadForm" class="hidden">
+            <h2>Upload Berita Acara</h2>
+            <input type="file" id="beritaAcaraFile" accept=".pdf">
+            <button onclick="submitBeritaAcara()">Submit</button>
+            <button onclick="backToDashboard()" class="back-button">Kembali ke Dashboard</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
